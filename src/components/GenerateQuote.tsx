@@ -1,9 +1,5 @@
 import { useState } from 'react';
-// import { Quote } from './QuoteList';
-interface Quote {
-    text: string;
-    author: string;
-  }
+import Quote from "../models/Quote"
 
 const GenerateQuote = () => {
   const [randomQuote, setRandomQuote] = useState<Quote | null>(null);

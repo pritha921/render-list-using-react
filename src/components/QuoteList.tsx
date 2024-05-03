@@ -1,22 +1,20 @@
-import  { useState, useEffect } from 'react';
-
-interface Quote {
-  text: string;
-  author: string;
-}
-
+import { useState, useEffect } from "react";
+import Quote from "../models/Quote"
 const QuoteList = () => {
   const [data, setData] = useState<Quote[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      // setIsLoading(true);
       try {
-        const response = await fetch('https://type.fit/api/quotes');
+        const response = await fetch("https://type.fit/api/quotes");
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
+      setIsLoading(false);
     };
 
     fetchData();
@@ -26,19 +24,19 @@ const QuoteList = () => {
     <div>
       <h2>Data List</h2>
       <ul>
-        {data.map((item) => (
-          <li key={item.text}>
-            <div>Author: {item.author}</div>
-            <div>Quote: {item.text}</div>
-          </li>
-        ))}
+        {isLoading ? (
+          <p>Loading....</p>
+        ) : (
+          data.map((item) => (
+            <li style={{backgroundColor:"red"}}key={item.text}>
+              <div>Author: {item.author}</div>
+              <div>Quote: {item.text}</div>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
 };
 
 export default QuoteList;
-
-
-
-
