@@ -1,19 +1,17 @@
-import { useState } from 'react';
-import Quote from "../models/Quote"
+import  { useState } from 'react';
+import Quote from "../models/Quote";
+import Props from "../models/Props";
 
-const GenerateQuote = () => {
+// interface Props {
+//   quotes: Quote[];
+// }
+
+const GenerateQuote = ({ quotes }: Props) => {
   const [randomQuote, setRandomQuote] = useState<Quote | null>(null);
 
   const generateRandomQuote = () => {
-    fetch('https://type.fit/api/quotes')
-      .then(response => response.json())
-      .then(data => {
-        const randomIndex = Math.floor(Math.random() * data.length);
-        setRandomQuote(data[randomIndex]);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    setRandomQuote(quotes[randomIndex]);
   };
 
   return (
@@ -22,7 +20,7 @@ const GenerateQuote = () => {
       {randomQuote && (
         <div>
           <p>{randomQuote.text}</p>
-          <p> {randomQuote.author}</p>
+          <p>{randomQuote.author}</p>
         </div>
       )}
     </div>
@@ -30,5 +28,10 @@ const GenerateQuote = () => {
 };
 
 export default GenerateQuote;
+
+
+
+
+
 
 
