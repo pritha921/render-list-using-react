@@ -1,11 +1,11 @@
-// import Quote from "../models/Quote";
-import Props from "../models/Props";
+import Quote from "../models/Quote";
+// import Props from "../models/Props";
 
-// interface Props {
-//   quotes: Quote[];
-// }
+interface QuoteListProps {
+  quotes: Quote[];
+}
 
-const QuoteList = ({ quotes }: Props) => {
+const QuoteList = ({ quotes }: QuoteListProps) => {
   return (
     <div>
       <h2>Data List</h2>

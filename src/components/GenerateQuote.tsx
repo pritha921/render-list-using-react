@@ -1,29 +1,19 @@
-import  { useState } from 'react';
+import React from "react";
 import Quote from "../models/Quote";
-import Props from "../models/Props";
 
-// interface Props {
-//   quotes: Quote[];
-// }
+interface GenerateQuoteProps {
+  quotes: Quote[];
+  setCurrentQuote: React.Dispatch<React.SetStateAction<Quote | null>>;
+}
 
-const GenerateQuote = ({ quotes }: Props) => {
-  const [randomQuote, setRandomQuote] = useState<Quote | null>(null);
-
-  const generateRandomQuote = () => {
+const GenerateQuote = ({ quotes, setCurrentQuote }: GenerateQuoteProps) => {
+  const getRandomQuote = () => {
     const randomIndex = Math.floor(Math.random() * quotes.length);
-    setRandomQuote(quotes[randomIndex]);
+    setCurrentQuote(quotes[randomIndex]);
   };
 
   return (
-    <div>
-      <button onClick={generateRandomQuote}>Generate Random Quote</button>
-      {randomQuote && (
-        <div>
-          <p>{randomQuote.text}</p>
-          <p>{randomQuote.author}</p>
-        </div>
-      )}
-    </div>
+    <button onClick={getRandomQuote}>Generate Random Quote</button>
   );
 };
 
